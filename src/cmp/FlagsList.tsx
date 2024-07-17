@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import { fethFlags } from '../service/flag.service'
+import { fetchFlags } from '../service/flag.service'
+import { Country } from '../types/flags'
+import FlagPreview from './FlagPreview'
 type Props = {}
 
 export default function FlagsList({ }: Props) {
-  const [flags, setFlags] = useState([])
+  const [flags, setFlags] = useState<Country[]>([])
   useEffect(() => {
     async function getFlags() {
       try {
-        const fetchedFlags = await fethFlags()
+        const fetchedFlags = await fetchFlags()
         setFlags(fetchedFlags)
       } catch (error) {
         alert('error to get flags')
@@ -17,6 +19,10 @@ export default function FlagsList({ }: Props) {
   }, [])
   console.log('flags:', flags)
   return (
-    <div className='container min-w-full'>FlagsList</div>
+    <div className='container min-w-full'>
+      <ul>
+        {flags?.map((flag, index) => <FlagPreview flag={flag} key={index} />)}
+      </ul>
+    </div>
   )
 }
