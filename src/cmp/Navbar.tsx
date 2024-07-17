@@ -33,9 +33,9 @@ export default function Navbar({ }: Props) {
 
   return (
     <nav className='container shadow-lg min-w-full flex items-center min-h-20'>
-      <h1 className='font-semibold text-4xl capitalize'>where in the world?</h1>
+      <h1 className='font-semibold text-lg sm:text-4xl capitalize'>where in the world?</h1>
       <div className='ml-auto flex gap-3'>
-        <h2 className='text-3xl font-semibold capitalize'>{theme === 'light' ? 'dark' : 'light'} mode</h2>
+        <h2 className='text-lg sm:text-3xl font-semibold capitalize'>{theme === 'light' ? 'dark' : 'light'} mode</h2>
         <label className='swap swap-rotate'>
           <input type="checkbox" onChange={handleTheme} />
           <MdSunny className='swap-on h-6 w-6 ' />

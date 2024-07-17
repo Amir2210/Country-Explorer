@@ -19,8 +19,8 @@ export default function FlagsList({ }: Props) {
   }, [])
   console.log('flags:', flags)
   return (
-    <div className='container min-w-full'>
-      <ul>
+    <div className='container min-w-full mt-10'>
+      <ul className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
         {flags?.map((flag, index) => <FlagPreview flag={flag} key={index} />)}
       </ul>
     </div>
