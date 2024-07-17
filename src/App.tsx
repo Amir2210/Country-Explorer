@@ -1,9 +1,10 @@
+import Navbar from './cmp/Navbar'
 
 function App() {
 
   return (
     <>
-
+      <Navbar />
     </>
   )
 }
