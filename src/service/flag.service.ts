@@ -4,16 +4,19 @@ import { useQuery } from 'react-query';
 
 
 export function useFetchCountries() {
-  const { searchInput } = useGlobalContext()
+  const { searchInput, regionInput } = useGlobalContext()
   const { isLoading, data, isError, error } = useQuery({
-    queryKey: ['flags', searchInput],
+    queryKey: ['flags', searchInput, regionInput],
     queryFn: async function fetchCountries() {
       try {
-        if (!searchInput) {
+        if (!searchInput && !regionInput) {
           const res = await axios.get('https://restcountries.com/v3.1/all')
           return res
-        } else {
+        } else if (searchInput) {
           const res = await axios.get(`https://restcountries.com/v3.1/name/${searchInput}`)
+          return res
+        } else {
+          const res = await axios.get(`https://restcountries.com/v3.1/region/${regionInput}`)
           return res
         }
       } catch (error) {

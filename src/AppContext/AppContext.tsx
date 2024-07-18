@@ -3,6 +3,8 @@ import { createContext, useContext, useState, ReactNode } from 'react'
 interface GlobalContextType {
   searchInput: string
   onSearchFlags: (input: string) => void
+  regionInput: string
+  onSearchRegion: (input: string) => void
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined)
@@ -24,14 +26,18 @@ interface AppContextProps {
 // AppContext component
 export default function AppContext({ children }: AppContextProps) {
   const [searchInput, setSearchInput] = useState<string>('')
+  const [regionInput, setRegion] = useState<string>('')
 
   const onSearchFlags = (input: string) => {
     setSearchInput(input)
   }
-  console.log('searchInput:', searchInput)
+
+  const onSearchRegion = (input: string) => {
+    setRegion(input)
+  }
 
   return (
-    <GlobalContext.Provider value={{ onSearchFlags, searchInput }}>
+    <GlobalContext.Provider value={{ onSearchFlags, searchInput, onSearchRegion, regionInput }}>
       {children}
     </GlobalContext.Provider>
   )

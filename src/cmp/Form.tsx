@@ -4,19 +4,28 @@ import { useGlobalContext } from '../AppContext/AppContext'
 type Props = {}
 
 export default function Form({ }: Props) {
-  const { onSearchFlags } = useGlobalContext()
+  const { onSearchFlags, onSearchRegion } = useGlobalContext()
   const [country, setCountry] = useState<string>('')
+  const [region, setRegion] = useState<string>('')
   const debouncedCountry = useDebounce<string>(country, 500);
 
   useEffect(() => {
-    onSearchFlags(debouncedCountry);
-  }, [debouncedCountry, onSearchFlags]);
+    onSearchFlags(debouncedCountry)
+    onSearchRegion(region)
+  }, [debouncedCountry, region, onSearchFlags]);
 
   function handleInputChange(country: string) {
+    setRegion('')
     setCountry(country)
   }
+
+  function handleRegionChange(region: string) {
+    setCountry('')
+    setRegion(region)
+  }
+  console.log('region:', region)
   return (
-    <form className='container  mt-10'>
+    <form className='container mt-10 flex flex-col items-center gap-5'>
       <label className="input input-bordered flex items-center gap-2">
         <input value={country} name='country' type="text" className="grow" placeholder="Search" onChange={(e) => handleInputChange(e.target.value)} />
         <svg
@@ -30,6 +39,15 @@ export default function Form({ }: Props) {
             clipRule="evenodd" />
         </svg>
       </label>
+      <select className=" capitalize select select-bordered w-full max-w-xs" value={region} name='region' onChange={(e) => handleRegionChange(e.target.value)}>
+        <option disabled selected>filter by region</option>
+        <option value={''}>all</option>
+        <option>Africa</option>
+        <option>America</option>
+        <option>Asia</option>
+        <option>Europe</option>
+        <option>Oceania</option>
+      </select>
     </form>
   )
 }
