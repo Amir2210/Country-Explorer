@@ -5,25 +5,38 @@ import { Hourglass } from 'react-loader-spinner'
 
 type Props = {}
 
+function isErrorWithMessage(error: unknown): error is { message: string } {
+  return typeof error === 'object' && error !== null && 'message' in error;
+}
+
 export default function FlagsList({ }: Props) {
   const { isLoading, data, isError, error } = useFetchCountries()
   const countries = data?.data
-  if (!data?.data.length) return <h2 className='text-center capitalize'>no result try again...</h2>
-  if (isError) return <h2>There was an error...</h2>
-  if (error) return <h2>There was an error...</h2>
-  if (!data) return (
-    <div className='loader'>
-      <Hourglass
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="hourglass-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        colors={['#306cce', '#72a1ed']}
-      />
-    </div>
-  )
+
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass="hourglass-wrapper"
+          colors={['#4fa94d', '#a3e635',]}
+        />
+      </div>
+    );
+  }
+
+  if (isError && isErrorWithMessage(error)) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <p className="text-red-500">Error: {error.message}</p>
+      </div>
+    )
+  }
 
   return (
     <div className='container min-w-full mt-10'>

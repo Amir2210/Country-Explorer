@@ -1,4 +1,5 @@
 import { Country } from '../types/flags'
+import { Link } from 'react-router-dom'
 
 interface FlagPreview {
   country: Country
@@ -12,7 +13,7 @@ export default function FlagPreview(props: FlagPreview) {
   const countryRegion = props.country.region
   const countryCapital = props.country.capital
   return (
-    <li className='card glass  bg-base-100 shadow-xl'>
+    <li className='card glass bg-base-100 shadow-xl'>
       <figure className=''>
         <img className='w-full max-h-48' src={countryImg} alt={countryName} />
       </figure>
@@ -22,7 +23,7 @@ export default function FlagPreview(props: FlagPreview) {
         <p><span className='font-bold capitalize'>region:</span> {countryRegion}</p>
         <p><span className='font-bold capitalize'>capital:</span> {countryCapital}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary capitalize">more detail</button>
+          <button className="btn btn-primary capitalize"><Link to={`/${countryName}`}>more detail</Link></button>
         </div>
       </div>
     </li>

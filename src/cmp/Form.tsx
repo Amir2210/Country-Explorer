@@ -40,13 +40,13 @@ export default function Form({ }: Props) {
         </svg>
       </label>
       <select className=" capitalize select select-bordered w-full max-w-xs" value={region} name='region' onChange={(e) => handleRegionChange(e.target.value)}>
-        <option disabled selected>filter by region</option>
+        <option value={''} disabled>filter by region</option>
         <option value={''}>all</option>
-        <option>Africa</option>
-        <option>America</option>
-        <option>Asia</option>
-        <option>Europe</option>
-        <option>Oceania</option>
+        <option value={'Africa'}>Africa</option>
+        <option value={'America'}>America</option>
+        <option value={'Asia'}>Asia</option>
+        <option value={'Europe'}>Europe</option>
+        <option value={'Oceania'}>Oceania</option>
       </select>
     </form>
   )
