@@ -32,7 +32,7 @@ export default function Navbar({ }: Props) {
   }, [theme])
 
   return (
-    <nav className='container shadow-lg min-w-full flex items-center min-h-20'>
+    <nav className='container shadow-lg min-w-full flex items-center min-h-20 sticky top-0 left-0 bg-base-300 z-10'>
       <h1 className='font-semibold text-lg sm:text-4xl capitalize'>where in the world?</h1>
       <div className='ml-auto flex gap-3'>
         <h2 className='text-lg sm:text-3xl font-semibold capitalize'>{theme === 'light' ? 'dark' : 'light'} mode</h2>
